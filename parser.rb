@@ -39,7 +39,7 @@ OptionParser.new do |opts|
 	end
 
 	# Fetch BibTex from Springer
-	opts.on('-s', '--eudl', 'fetch BibTex from Spring') do |a|
+	opts.on('-s', '--springer', 'fetch BibTex from Spring') do |a|
 		# example: http://link.springer.com/article/10.2478/s11696-013-0462-1
 		subUrl = /link.springer.com\//.match(ARGV[0]).post_match
 		url = "http://link.springer.com/export-citation/#{subUrl}.bib"
