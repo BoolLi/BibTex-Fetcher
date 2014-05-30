@@ -9,17 +9,18 @@ OptionParser.new do |opts|
 	
 	# Fetch BibTex from ACM DL
 	opts.on('-a', '--acm', 'fetch BibTex from ACM Digital Library') do |a|
-		# example: 2512761
-		url = "http://dl.acm.org/exportformats.cfm?id=#{ARGV[0]}&expformat=bibtex"
-		puts ARGV[0]
+		# example: http://dl.acm.org/citation.cfm?id=544220.544241&coll=DL&dl=ACM&CFID=468547649&CFTOKEN=32770262
+		id = ARGV[0].scan(/id=\d+\.(\d+)/).first.first
+		url = "http://dl.acm.org/exportformats.cfm?id=#{id}&expformat=bibtex"
 		doc = Nokogiri::HTML(open(url))
 		puts doc.search('pre').map{|line| line.text}
 	end
 
 	# Fetch BibTex from IEEE Xplore
 	opts.on('-i', '--ieee', 'fetch BibTex from IEEE Xplore') do |a|
-		# exsample: 6665065	
-		RestClient.post("http://ieeexplore.ieee.org/xpl/downloadCitations", "recordIds"=> ARGV[0], "citations-format" => "citation-only", "download-format" => "download-bibtex", "x" => "74", "y" => "7"){|response, request, result, &block|
+		# exsample: 6665065
+		id = ARGV[0].scan(/arnumber=(\d+)/).first.first	
+		RestClient.post("http://ieeexplore.ieee.org/xpl/downloadCitations", "recordIds"=> id, "citations-format" => "citation-only", "download-format" => "download-bibtex", "x" => "74", "y" => "7"){|response, request, result, &block|
 			if [301, 302, 307].include?(response.code)
 				puts response.follow_redirection(request, result, &block)
 				
