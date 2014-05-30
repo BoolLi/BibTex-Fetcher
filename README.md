@@ -4,7 +4,9 @@ A simple program written in Ruby to fetch BibTex from different digital librarie
 
 ##How to install:
 run
+
     bundle install
+
 which will install all the dependencies.
 
 ##Usage:
