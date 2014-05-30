@@ -19,7 +19,7 @@ which will install all the dependencies.
 
     -e, --eudl                       fetch BibTex from EUDL
 
-    -s, --springer                   fetch BibTex from Spring
+    -s, --springer                   fetch BibTex from Springer
 
 The program will output the Bibtex in HTML format. Note that if you run the command in command line, you might want to escape the "=" and "&" characters in the URL.
 
